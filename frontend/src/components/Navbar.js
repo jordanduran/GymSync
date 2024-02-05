@@ -7,9 +7,6 @@ const Navbar = () => {
         <Link to='/'>
           <h1 className='text-3xl font-bold text-white'>GymSync</h1>
         </Link>
-        <Link to='/create' className='bg-white p-2 font-bold'>
-          Add New Workout
-        </Link>
       </div>
     </header>
   );
