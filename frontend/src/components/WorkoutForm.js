@@ -25,8 +25,6 @@ const WorkoutForm = () => {
 
     const data = await response.json();
 
-    console.log(data, 'data');
-
     if (!response.ok) {
       setError(data.error);
       setEmptyFields(data.emptyFields);
@@ -42,8 +40,6 @@ const WorkoutForm = () => {
       dispatch({ type: 'CREATE_WORKOUT', payload: data });
     }
   };
-
-  console.log(emptyFields, 'empy');
 
   return (
     <form

@@ -15,7 +15,7 @@ const App = () => {
         <div className='max-x-3xl mx-auto p-8'>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/edit' element={<Edit />} />
+            <Route path='/edit/:id' element={<Edit />} />
           </Routes>
         </div>
       </BrowserRouter>

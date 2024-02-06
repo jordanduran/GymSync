@@ -53,7 +53,7 @@ const WorkoutDetails = ({ workout }) => {
               />
             </svg>
           </button>
-          <Link to='/edit'>
+          <Link to={`/edit/${workout._id}`}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'

@@ -17,9 +17,15 @@ export const workoutsReducer = (state, action) => {
       const index = state.workouts.findIndex((workout) => workout._id === id);
       const copy = [...state.workouts];
       copy.splice(index, 1);
-
       return {
         workouts: copy,
+      };
+    case 'UPDATE_WORKOUT':
+      const workouts = state?.workouts?.filter(
+        (workout) => workout._id !== action.payload._id
+      );
+      return {
+        workouts: [action.payload, ...workouts],
       };
     default:
       return state;

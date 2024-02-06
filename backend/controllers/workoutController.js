@@ -74,6 +74,26 @@ const deleteWorkout = async (req, res) => {
 const updateWorkout = async (req, res) => {
   const { id } = req.params;
 
+  const { newTitle, newLoad, newReps } = req.body;
+
+  let emptyFields = [];
+
+  if (!newTitle) {
+    emptyFields.push('title');
+  }
+  if (!newLoad) {
+    emptyFields.push('load');
+  }
+  if (!newReps) {
+    emptyFields.push('reps');
+  }
+
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: 'Please fill in all fields', emptyFields });
+  }
+
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: 'Workout does not exist' });
   }
@@ -81,7 +101,9 @@ const updateWorkout = async (req, res) => {
   const workout = await Workout.findOneAndUpdate(
     { _id: id },
     {
-      ...req.body,
+      title: newTitle,
+      load: newLoad,
+      reps: newReps,
     }
   );
 
