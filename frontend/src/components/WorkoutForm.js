@@ -36,8 +36,8 @@ const WorkoutForm = () => {
       setReps('');
       setError(null);
       setEmptyFields([]);
-      console.log('New workout added', data);
       dispatch({ type: 'CREATE_WORKOUT', payload: data });
+      console.log('New workout added', data);
     }
   };
 
@@ -53,7 +53,7 @@ const WorkoutForm = () => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         className={
-          emptyFields?.includes('title')
+          emptyFields?.includes('title') && title === ''
             ? 'border border-red-600'
             : 'border border-black mx-2'
         }
@@ -65,7 +65,7 @@ const WorkoutForm = () => {
         value={load}
         onChange={(e) => setLoad(e.target.value)}
         className={
-          emptyFields?.includes('load')
+          emptyFields?.includes('load') && load === ''
             ? 'border border-red-600'
             : 'border border-black mx-2'
         }
@@ -77,7 +77,7 @@ const WorkoutForm = () => {
         value={reps}
         onChange={(e) => setReps(e.target.value)}
         className={
-          emptyFields?.includes('reps')
+          emptyFields?.includes('reps') && reps === ''
             ? 'border border-red-600'
             : 'border border-black mx-2'
         }

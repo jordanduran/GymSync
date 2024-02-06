@@ -36,13 +36,10 @@ const EditForm = ({ workout }) => {
 
     if (response.ok) {
       const updatedWorkout = {
-        createdAt: data?.createdAt,
         load: newLoad,
         reps: newReps,
         title: newTitle,
-        updatedAt: data?.updatedAt,
-        __v: data?.__v,
-        _id: data?._id,
+        ...data,
       };
 
       setNewTitle('');
@@ -50,8 +47,8 @@ const EditForm = ({ workout }) => {
       setNewReps('');
       setError(null);
       setEmptyFields([]);
-      console.log('Workout updated', data);
       dispatch({ type: 'UPDATE_WORKOUT', payload: updatedWorkout });
+      console.log('Workout updated', data);
       navigate('/');
     }
   };
@@ -67,7 +64,7 @@ const EditForm = ({ workout }) => {
           value={newTitle}
           onChange={(e) => setNewTitle(e.target.value)}
           className={
-            emptyFields?.includes('title')
+            emptyFields?.includes('title') && newTitle === ''
               ? 'border border-red-600'
               : 'border border-black mx-2'
           }
@@ -79,7 +76,7 @@ const EditForm = ({ workout }) => {
           value={newLoad}
           onChange={(e) => setNewLoad(e.target.value)}
           className={
-            emptyFields?.includes('load')
+            emptyFields?.includes('load') && newLoad === ''
               ? 'border border-red-600'
               : 'border border-black mx-2'
           }
@@ -91,7 +88,7 @@ const EditForm = ({ workout }) => {
           value={newReps}
           onChange={(e) => setNewReps(e.target.value)}
           className={
-            emptyFields?.includes('reps')
+            emptyFields?.includes('reps') && newReps === ''
               ? 'border border-red-600'
               : 'border border-black mx-2'
           }
