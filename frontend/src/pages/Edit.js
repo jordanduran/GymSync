@@ -19,7 +19,9 @@ const Edit = () => {
     fetchWorkout();
   }, [id]);
 
-  return <EditForm workoutId={id} workout={workout} />;
+  if (workout) {
+    return <EditForm workout={workout} />;
+  }
 };
 
 export default Edit;

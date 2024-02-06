@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 
-const EditForm = ({ workoutId, workout }) => {
-  const [newTitle, setNewTitle] = useState(workout?.title);
-  const [newLoad, setNewLoad] = useState('');
-  const [newReps, setNewReps] = useState('');
+const EditForm = ({ workout }) => {
+  const { _id, title, load, reps } = workout;
+
+  const [newTitle, setNewTitle] = useState(title);
+  const [newLoad, setNewLoad] = useState(load);
+  const [newReps, setNewReps] = useState(reps);
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
 
@@ -17,7 +19,7 @@ const EditForm = ({ workoutId, workout }) => {
 
     const updatedWorkout = { newTitle, newLoad, newReps };
 
-    const response = await fetch(`/api/workouts/${workoutId}`, {
+    const response = await fetch(`/api/workouts/${_id}`, {
       method: 'PATCH',
       body: JSON.stringify(updatedWorkout),
       headers: {
@@ -61,7 +63,7 @@ const EditForm = ({ workoutId, workout }) => {
         <label className='font-bold'>Title:</label>
         <input
           type='text'
-          name='title'
+          name='newTitle'
           value={newTitle}
           onChange={(e) => setNewTitle(e.target.value)}
           className={
