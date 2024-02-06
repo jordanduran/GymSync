@@ -12,6 +12,15 @@ export const workoutsReducer = (state, action) => {
       return {
         workouts: [action.payload, ...state.workouts],
       };
+    case 'DELETE_WORKOUT':
+      const id = action.payload;
+      const index = state.workouts.findIndex((workout) => workout._id === id);
+      const copy = [...state.workouts];
+      copy.splice(index, 1);
+
+      return {
+        workouts: copy,
+      };
     default:
       return state;
   }

@@ -1,7 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// pages & components
+// pages
 import Home from './pages/Home';
+import Edit from './pages/Edit';
+
+// components
 import Navbar from './components/Navbar';
 
 const App = () => {
@@ -12,6 +15,7 @@ const App = () => {
         <div className='max-x-3xl mx-auto p-8'>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/edit' element={<Edit />} />
           </Routes>
         </div>
       </BrowserRouter>

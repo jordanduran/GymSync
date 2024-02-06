@@ -67,8 +67,8 @@ const WorkoutForm = () => {
         onChange={(e) => setReps(e.target.value)}
         className='border border-black mx-2'
       />
-      <button className='border px-2 py-1 border-blue-800 bg-blue-600 text-white font-semibold mx-2 rounded-md hover:bg-blue-700'>
-        Add workout
+      <button className='px-2 py-1 bg-blue-600 text-white font-semibold mx-2 rounded-md hover:bg-blue-700'>
+        Add new workout
       </button>
       {error && (
         <div
