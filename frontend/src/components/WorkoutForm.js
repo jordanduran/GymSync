@@ -6,6 +6,7 @@ const WorkoutForm = () => {
   const [load, setLoad] = useState('');
   const [reps, setReps] = useState('');
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   const { dispatch } = useWorkoutsContext();
 
@@ -24,8 +25,11 @@ const WorkoutForm = () => {
 
     const data = await response.json();
 
+    console.log(data, 'data');
+
     if (!response.ok) {
       setError(data.error);
+      setEmptyFields(data.emptyFields);
     }
 
     if (response.ok) {
@@ -33,10 +37,13 @@ const WorkoutForm = () => {
       setLoad('');
       setReps('');
       setError(null);
+      setEmptyFields([]);
       console.log('New workout added', data);
       dispatch({ type: 'CREATE_WORKOUT', payload: data });
     }
   };
+
+  console.log(emptyFields, 'empy');
 
   return (
     <form
@@ -49,23 +56,35 @@ const WorkoutForm = () => {
         name='title'
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className='border border-black mx-2'
+        className={
+          emptyFields?.includes('title')
+            ? 'border border-red-600'
+            : 'border border-black mx-2'
+        }
       />
       <label className='font-bold'>Load (in kg):</label>
       <input
-        type='text'
-        name='title'
+        type='number'
+        name='load'
         value={load}
         onChange={(e) => setLoad(e.target.value)}
-        className='border border-black mx-2'
+        className={
+          emptyFields?.includes('load')
+            ? 'border border-red-600'
+            : 'border border-black mx-2'
+        }
       />
       <label className='font-bold'>Reps:</label>
       <input
-        type='text'
-        name='title'
+        type='number'
+        name='reps'
         value={reps}
         onChange={(e) => setReps(e.target.value)}
-        className='border border-black mx-2'
+        className={
+          emptyFields?.includes('reps')
+            ? 'border border-red-600'
+            : 'border border-black mx-2'
+        }
       />
       <button className='px-2 py-1 bg-blue-600 text-white font-semibold mx-2 rounded-md hover:bg-blue-700'>
         Add new workout
